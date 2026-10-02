@@ -29,7 +29,7 @@ ul,ol{margin:0;padding-left:1.4em;display:grid;gap:4px}
 .opt[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
 .opt.right{border-color:var(--ok);background:var(--ok);color:#fff}.opt.wrong{border-color:var(--accent);background:var(--accent);color:#fff}
 .opt:disabled{cursor:default}
-.btn{font:inherit;font-weight:700;font-size:15px;padding:8px 16px;border-radius:7px;border:0;background:var(--ink);color:var(--paper);cursor:pointer}
+.btn{text-decoration:none;display:inline-block;font:inherit;font-weight:700;font-size:15px;padding:8px 16px;border-radius:7px;border:0;background:var(--ink);color:var(--paper);cursor:pointer}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
 .btn:disabled{opacity:.4;cursor:default}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -49,14 +49,28 @@ label.ck input{width:18px;height:18px;margin-top:5px}
 .pager{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-3);line-height:1.75}
 footer a{color:inherit}
-@media print{nav.top,.chips,.pager,.no-print{display:none}body{background:#fff}}
-</style></head><body><div class="wrap"><nav class="top"><a href="index.html" aria-current=page>首頁</a><a href="handbook.html">閱讀策略手冊</a><a href="worksheets.html">學習單</a></nav><header class="hero"><p class="kicker">會考國文・學測國文</p><h1>國文閱讀理解策略</h1>
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--rule);vertical-align:middle}
+th{font-size:13px;color:var(--ink-3);font-weight:700}
+.tbl{overflow-x:auto;min-width:0}
+.nw{white-space:nowrap}
+section.card>*{min-width:0}
+@media (max-width:520px){th,td{padding:6px 4px;font-size:14px}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.stat{border:1px solid var(--rule);border-radius:8px;padding:10px 12px}.stat b{display:block;font-size:26px;line-height:1.2}
+.lv{font-size:13px;font-weight:700;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.lv.good{background:var(--ok-soft);color:var(--ok)}.lv.weak{background:var(--accent-soft);color:var(--accent)}.lv.none{background:var(--rule-2);color:var(--ink-3)}
+.me{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.me label{display:grid;gap:2px;font-size:14px;color:var(--ink-3)}
+.me input{width:100%;min-width:0;font:inherit;font-size:16px;padding:6px 10px;border:1.5px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink)}
+@media print{nav.top,.chips,.pager,.no-print,footer{display:none}body{background:#fff}section.card{break-inside:avoid;border-color:#ccc}}
+</style></head><body><div class="wrap"><nav class="top"><a href="index.html" aria-current=page>首頁</a><a href="handbook.html">閱讀策略手冊</a><a href="worksheets.html">學習單</a><a href="report.html">我的分析報告</a></nav><header class="hero"><p class="kicker">會考國文・學測國文</p><h1>國文閱讀理解策略</h1>
 <p>把會考和學測國文的閱讀題整理成 12 種閱讀策略。先讀<a href="handbook.html">閱讀策略手冊</a>學方法，再用<a href="worksheets.html">學習單</a>練習：
 點選答案、按「確認答案」看對錯，想看解析再按「看答案與解析」。</p>
 <p class="sub">題目取自會考國文 111–115 年與學測國文 107–115 年。你的作答、筆記與勾選會自動存在這台裝置上。</p></header>
 <p style="margin-top:16px" id="summary"></p><div class="grid" id="grid"></div>
-<div class="row no-print" style="margin-top:20px"><a class="btn ghost" href="files/閱讀策略手冊_學生版.docx">下載手冊列印版</a>
-<a class="btn ghost" href="files/學習單_學生版.docx">下載學習單列印版</a><button type="button" class="btn ghost" id="reset">清除我的作答紀錄</button></div><footer><p><b>著作權與來源說明</b>　本站收錄的國中教育會考與大學學測試題，依著作權法第 9 條第 1 項第 5 款，屬依法令舉行之考試試題，不得為著作權之標的；但試題中引用的文章、詩文、圖片等，著作權仍屬原作者所有。本站僅供非營利之教學與研究使用。題目圖片裁切自官方公布的試卷，答案以官方公布為準；閱讀策略分類與解析為本站自行撰寫，並非官方解析。作答紀錄只存在你自己的裝置上。</p><p>官方來源：<a href="https://cap.rcpet.edu.tw/examination.html" target="_blank" rel="noopener">國中教育會考・歷屆試題</a>｜<a href="https://www.ceec.edu.tw/xmfile?xsmsid=0J052424829869345634" target="_blank" rel="noopener">大考中心・學測歷年試題</a></p></footer></div><script src="data.js"></script><script>
+<div class="row no-print" style="margin-top:20px"><a class="btn" href="report.html">看我的分析報告</a>
+<button type="button" class="btn ghost" id="reset">清除我的作答紀錄</button></div><footer><p><b>著作權與來源說明</b>　本站收錄的國中教育會考與大學學測試題，依著作權法第 9 條第 1 項第 5 款，屬依法令舉行之考試試題，不得為著作權之標的；但試題中引用的文章、詩文、圖片等，著作權仍屬原作者所有。本站僅供非營利之教學與研究使用。題目圖片裁切自官方公布的試卷，答案以官方公布為準；閱讀策略分類與解析為本站自行撰寫，並非官方解析。作答紀錄只存在你自己的裝置上。</p><p>官方來源：<a href="https://cap.rcpet.edu.tw/examination.html" target="_blank" rel="noopener">國中教育會考・歷屆試題</a>｜<a href="https://www.ceec.edu.tw/xmfile?xsmsid=0J052424829869345634" target="_blank" rel="noopener">大考中心・學測歷年試題</a></p></footer></div><script src="data.js"></script><script>
 const KEY="guowen-strategy-v1";
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{a:{},n:{},c:{}};}catch(e){return {a:{},n:{},c:{}};}}
 let S=load();
@@ -80,7 +94,7 @@ function wire(root){
 function question(id,opt){
   opt=opt||{};
   const q=D.qs[id];
-  return `<div class="q" data-q="${id}"><img src="${q.img}" alt="${esc(q.src)}" loading="lazy">
+  return `<div class="q" data-q="${id}"><img src="${q.img}" alt="${esc(q.src)}" loading="lazy">${opt.mid||""}
   <p class="sub">${q.multi?"多選題：選出所有正確的選項，再按「確認答案」。":"單選題：選一個答案，再按「確認答案」。"}</p>
   <div class="opts">${q.opts.split("").map(o=>`<button type="button" class="opt" data-o="${o}" aria-pressed="false">${o}</button>`).join("")}
   <button type="button" class="btn" data-act="ok" disabled>確認答案</button></div>

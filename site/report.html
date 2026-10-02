@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>閱讀策略手冊</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"><style>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>我的分析報告</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"><style>
 :root{color-scheme:light;--paper:#FAF9F6;--surface:#fff;--ink:#1E2227;--ink-2:#4A515A;--ink-3:#6F767F;--rule:#E3E1DB;--rule-2:#EFEDE8;
 --accent:#C23B4E;--accent-soft:#F7E3E6;--ok:#2E9384;--ok-soft:#DDF0ED;--focus:#2F6DB5}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#16181B;--surface:#1E2125;--ink:#ECEDEF;--ink-2:#B9BEC5;
@@ -64,7 +64,7 @@ section.card>*{min-width:0}
 .me label{display:grid;gap:2px;font-size:14px;color:var(--ink-3)}
 .me input{width:100%;min-width:0;font:inherit;font-size:16px;padding:6px 10px;border:1.5px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink)}
 @media print{nav.top,.chips,.pager,.no-print,footer{display:none}body{background:#fff}section.card{break-inside:avoid;border-color:#ccc}}
-</style></head><body><div class="wrap"><nav class="top"><a href="index.html">首頁</a><a href="handbook.html" aria-current=page>閱讀策略手冊</a><a href="worksheets.html">學習單</a><a href="report.html">我的分析報告</a></nav><header class="hero"><h1>閱讀策略手冊</h1><p>選一種策略，讀懂它的用法，再做兩題歷屆例題。</p></header><div class="chips" id="chips"></div><div id="main"></div><footer><p><b>著作權與來源說明</b>　本站收錄的國中教育會考與大學學測試題，依著作權法第 9 條第 1 項第 5 款，屬依法令舉行之考試試題，不得為著作權之標的；但試題中引用的文章、詩文、圖片等，著作權仍屬原作者所有。本站僅供非營利之教學與研究使用。題目圖片裁切自官方公布的試卷，答案以官方公布為準；閱讀策略分類與解析為本站自行撰寫，並非官方解析。作答紀錄只存在你自己的裝置上。</p><p>官方來源：<a href="https://cap.rcpet.edu.tw/examination.html" target="_blank" rel="noopener">國中教育會考・歷屆試題</a>｜<a href="https://www.ceec.edu.tw/xmfile?xsmsid=0J052424829869345634" target="_blank" rel="noopener">大考中心・學測歷年試題</a></p></footer></div><script src="data.js"></script><script>
+</style></head><body><div class="wrap"><nav class="top"><a href="index.html">首頁</a><a href="handbook.html">閱讀策略手冊</a><a href="worksheets.html">學習單</a><a href="report.html" aria-current=page>我的分析報告</a></nav><header class="hero"><h1>我的分析報告</h1><p>根據你在學習單和手冊例題的作答、筆記與反思，自動整理出你的閱讀策略表現。填好姓名，就可以列印或存成 PDF 交給老師。</p></header><div id="main"></div><footer><p><b>著作權與來源說明</b>　本站收錄的國中教育會考與大學學測試題，依著作權法第 9 條第 1 項第 5 款，屬依法令舉行之考試試題，不得為著作權之標的；但試題中引用的文章、詩文、圖片等，著作權仍屬原作者所有。本站僅供非營利之教學與研究使用。題目圖片裁切自官方公布的試卷，答案以官方公布為準；閱讀策略分類與解析為本站自行撰寫，並非官方解析。作答紀錄只存在你自己的裝置上。</p><p>官方來源：<a href="https://cap.rcpet.edu.tw/examination.html" target="_blank" rel="noopener">國中教育會考・歷屆試題</a>｜<a href="https://www.ceec.edu.tw/xmfile?xsmsid=0J052424829869345634" target="_blank" rel="noopener">大考中心・學測歷年試題</a></p></footer></div><script src="data.js"></script><script>
 const KEY="guowen-strategy-v1";
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{a:{},n:{},c:{}};}catch(e){return {a:{},n:{},c:{}};}}
 let S=load();
@@ -116,21 +116,45 @@ function wireQuestions(root,onChange){
   });
 }
 
+const ME=[["me-name","姓名"],["me-class","班級"],["me-no","座號"]];
+function level(d,r){if(!d)return["未作答","none"];if(r<d)return["需要加強","weak"];return d===3?["精熟","good"]:["目前全對（未做完）","good"];}
 function render(){
-  const s=strat(curCode());chips("handbook");
-  const i=D.strats.indexOf(s),prev=D.strats[i-1],next=D.strats[i+1];
-  $("#main").innerHTML=`<section class="card"><p class="kicker">${s.code}・出現 ${s.n} 題（會考 ${s.pct["會考"]}%、學測 108 課綱 ${s.pct["學測新"]}%）</p>
-  <h2>${esc(s.name)}</h2><p><b>${esc(s.one)}</b></p>
-  <h3>看到這些就用它</h3><ul>${s.signals.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
-  <h3>操作步驟</h3><ol>${s.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
-  <h3>常見陷阱</h3><p>${esc(s.traps)}</p></section>
-  ${s.picks.slice(0,2).map((id,k)=>`<section class="card"><p class="kicker">例題 ${k+1}</p><h3>${esc(D.qs[id].src)}</h3>${question(id)}</section>`).join("")}
-  <section class="card"><h3>自我檢核</h3>${s.check.map((c,k)=>check(`hb-${s.code}-${k}`,c)).join("")}</section>
-  <div class="pager">${prev?`<a class="btn ghost" href="#${prev.code}">← ${prev.code} ${esc(prev.name)}</a>`:"<span></span>"}
-  <a class="btn" href="worksheets.html#${s.code}">做這個策略的學習單 →</a>
-  ${next?`<a class="btn ghost" href="#${next.code}">${next.code} ${esc(next.name)} →</a>`:"<span></span>"}</div>`;
-  wire($("#main"));wireQuestions($("#main"),()=>chips("handbook"));
-  window.scrollTo(0,0);
+  const rows=D.strats.map(s=>{const done=s.picks.filter(i=>S.a[i]),right=done.filter(i=>S.a[i].ok);
+    return {s,d:done.length,r:right.length,wrong:done.filter(i=>!S.a[i].ok),w:Math.max(s.pct["會考"],s.pct["學測新"]),lv:level(done.length,right.length)};});
+  const D_=rows.reduce((a,x)=>a+x.d,0),R_=rows.reduce((a,x)=>a+x.r,0),rate=D_?Math.round(100*R_/D_):0,full=rows.filter(x=>x.d===3).length;
+  const today=new Date().toLocaleDateString("zh-TW");
+  let html=`<section class="card"><p class="kicker">基本資料</p><div class="me">${ME.map(([k,t])=>`<label>${t}<input data-me="${k}" value="${esc(S.n[k]||"")}"></label>`).join("")}
+  <label>產出日期<input value="${today}" readonly></label></div></section>`;
+  if(!D_){$("#main").innerHTML=html+`<section class="card"><p>你還沒有作答紀錄。先到<a href="worksheets.html">學習單</a>做題目，做完再回來看報告。</p></section>`;wireMe();return;}
+  const comment=rate>=85?"整體表現很好，大部分策略都能正確運用。接下來可以挑戰還沒做完的策略，並試著向同學說明你的解題步驟。":
+    rate>=60?"大致掌握了閱讀策略，但有幾種策略還不穩定。先從下面「優先加強」的策略開始，回到手冊複習步驟，再重做一次學習單。":
+    "閱讀策略的基礎還需要加強。建議一次只練一種策略：先讀手冊、照步驟做示範題，答錯時把原因寫進反思，再做練習題。";
+  html+=`<section class="card"><p class="kicker">整體表現</p><div class="stats">
+  <div class="stat"><b>${D_} / 36</b>已作答題數</div><div class="stat"><b>${R_}</b>答對題數</div>
+  <div class="stat"><b>${rate}%</b>正確率</div><div class="stat"><b>${full} / 12</b>完成的學習單</div></div>
+  <p>${comment}${D_<12?"（目前作答題數還不多，這份報告只反映部分情況。）":""}</p></section>`;
+  html+=`<section class="card"><p class="kicker">各策略表現</p><div class="tbl"><table><thead><tr><th>策略</th><th>答對</th><th style="min-width:80px">正確率</th><th>判定</th></tr></thead><tbody>
+  ${rows.map(x=>`<tr><td><b>${x.s.code}</b> ${esc(x.s.name)}</td><td class="nw">${x.d?`${x.r} / ${x.d}`:"—"}</td>
+  <td>${x.d?`<div class="bar"><span style="width:${100*x.r/x.d}%"></span></div><span class="sub">${Math.round(100*x.r/x.d)}%</span>`:"—"}</td>
+  <td><span class="lv ${x.lv[1]}">${x.lv[0]}</span></td></tr>`).join("")}</tbody></table></div></section>`;
+  const good=rows.filter(x=>x.d&&x.r===x.d),weak=rows.filter(x=>x.r<x.d).sort((a,b)=>b.w-a.w),none=rows.filter(x=>!x.d).sort((a,b)=>b.w-a.w);
+  html+=`<section class="card"><p class="kicker">我的優勢</p>${good.length?`<ul>${good.map(x=>`<li><b>${x.s.code} ${esc(x.s.name)}</b>：${esc(x.s.one)}${x.d<3?`（還有 ${3-x.d} 題沒做）`:""}</li>`).join("")}</ul>`:"<p>目前還沒有全部答對的策略，繼續加油！</p>"}</section>`;
+  html+=`<section class="card"><p class="kicker">優先加強</p>${weak.length?`<p class="sub">依大考出題比例排序，越前面的策略越常考，越值得先加強。</p>`+weak.map(x=>`<div class="step">
+  <b>${x.s.code} ${esc(x.s.name)}　答對 ${x.r} / ${x.d}　<span class="sub">（會考約 ${x.s.pct["會考"]}%、學測約 ${x.s.pct["學測新"]}% 的題目用到）</span></b>
+  <p>答錯的題目：${x.wrong.map(i=>`${esc(D.qs[i].src)}（你選 ${S.a[i].pick}）`).join("；")}</p>
+  <p><b>要注意：</b>${esc(x.s.traps)}</p>
+  <p><b>下次照這個步驟：</b>${x.s.steps.map((t,k)=>`${k+1}. ${esc(t)}`).join("　")}</p>
+  <p class="no-print"><a href="handbook.html#${x.s.code}">複習手冊</a>　<a href="worksheets.html#${x.s.code}">重做學習單</a></p></div>`).join(""):"<p>目前沒有答錯的策略。</p>"}</section>`;
+  if(none.length)html+=`<section class="card"><p class="kicker">還沒練習的策略</p><p>${none.map(x=>`<a href="worksheets.html#${x.s.code}">${x.s.code} ${esc(x.s.name)}</a>`).join("、")}</p>
+  <p class="sub">排在前面的策略在大考比較常出現，建議先練。</p></section>`;
+  const refl=rows.filter(x=>(S.n[`ws-${x.s.code}-r`]||"").trim());
+  const ck=rows.map(x=>x.s.check.filter((c,k)=>S.c[`ws-${x.s.code}-c${k}`]||S.c[`hb-${x.s.code}-${k}`]).length),ckAll=rows.reduce((a,x)=>a+x.s.check.length,0);
+  html+=`<section class="card"><p class="kicker">我的反思</p><p>自我檢核：勾選了 ${ck.reduce((a,b)=>a+b,0)} / ${ckAll} 項。</p>
+  ${refl.length?refl.map(x=>`<div class="step"><b>${x.s.code} ${esc(x.s.name)}</b><p>${esc(S.n[`ws-${x.s.code}-r`])}</p></div>`).join(""):"<p class=\"sub\">還沒有寫反思。學習單最後的反思欄位寫下答錯的原因，會出現在這裡。</p>"}</section>`;
+  html+=`<div class="row no-print"><button type="button" class="btn" onclick="print()">列印或存成 PDF</button>
+  <span class="sub">要存成 PDF：按下後在「目的地」選「另存為 PDF」。</span></div>`;
+  $("#main").innerHTML=html;wireMe();
 }
-addEventListener("hashchange",render);render();
+function wireMe(){document.querySelectorAll("input[data-me]").forEach(t=>t.oninput=()=>{S.n[t.dataset.me]=t.value;save();});}
+render();
 </script></body></html>
